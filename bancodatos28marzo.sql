@@ -1,6 +1,6 @@
 /*
-SQLyog Community v13.1.2 (64 bit)
-MySQL - 10.4.22-MariaDB : Database - banco_datos_fet
+SQLyog Community v13.1.5  (64 bit)
+MySQL - 10.1.34-MariaDB : Database - banco_datos_fet
 *********************************************************************
 */
 
@@ -15,6 +15,35 @@ MySQL - 10.4.22-MariaDB : Database - banco_datos_fet
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`banco_datos_fet` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
 USE `banco_datos_fet`;
+
+/*Table structure for table `administrativos` */
+
+DROP TABLE IF EXISTS `administrativos`;
+
+CREATE TABLE `administrativos` (
+  `id_Administrativos` int(11) NOT NULL AUTO_INCREMENT,
+  `Nomina` varchar(30) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Cedula` int(11) NOT NULL,
+  `Correo` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_Administrativos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `administrativos` */
+
+/*Table structure for table `docentes` */
+
+DROP TABLE IF EXISTS `docentes`;
+
+CREATE TABLE `docentes` (
+  `id_Docentes` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(30) NOT NULL,
+  `Cedula` int(11) NOT NULL,
+  `Correo` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_Docentes`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `docentes` */
 
 /*Table structure for table `empleados` */
 
@@ -37,25 +66,19 @@ insert  into `empleados`(`id_empleado`,`nombre`,`apellido`,`edad`) values
 (5,'Victoria','Villalba',25),
 (6,'Yan','Villalba',26);
 
-/*Table structure for table `empleados_fet` */
+/*Table structure for table `fecha_contrato` */
 
-DROP TABLE IF EXISTS `empleados_fet`;
+DROP TABLE IF EXISTS `fecha_contrato`;
 
-CREATE TABLE `empleados_fet` (
-  `id_empleado_fet` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `apellido` varchar(50) DEFAULT NULL,
-  `direccion` varchar(50) DEFAULT NULL,
-  `edad` int(11) DEFAULT NULL,
-  `id_programa` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_empleado_fet`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `fecha_contrato` (
+  `id_Inicio_Contrato` int(11) NOT NULL AUTO_INCREMENT,
+  `Inicio` datetime NOT NULL,
+  `Finalizacion` datetime NOT NULL,
+  `Nomina` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_Inicio_Contrato`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `empleados_fet` */
-
-insert  into `empleados_fet`(`id_empleado_fet`,`nombre`,`apellido`,`direccion`,`edad`,`id_programa`,`id_usuario`) values 
-(1,'Alexandra ','Roa','km 10 via al sur',25,6,0);
+/*Data for the table `fecha_contrato` */
 
 /*Table structure for table `lista_usuarios` */
 
@@ -75,25 +98,17 @@ CREATE TABLE `lista_usuarios` (
 
 /*Data for the table `lista_usuarios` */
 
-/*Table structure for table `programa` */
+/*Table structure for table `nivel_academico` */
 
-DROP TABLE IF EXISTS `programa`;
+DROP TABLE IF EXISTS `nivel_academico`;
 
-CREATE TABLE `programa` (
-  `id_programa` int(11) NOT NULL AUTO_INCREMENT,
-  `programa` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_programa`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `nivel_academico` (
+  `id_Nivel_Aca` int(11) NOT NULL AUTO_INCREMENT,
+  `Academico` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_Nivel_Aca`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `programa` */
-
-insert  into `programa`(`id_programa`,`programa`) values 
-(1,'Seguridad ocupacional'),
-(2,'Ingenieria de alimentos'),
-(3,'Ingenieria de alimentos'),
-(4,'Ingenieria de software'),
-(5,'Ingeieria Electrica'),
-(6,'Ingenieria Ambiental');
+/*Data for the table `nivel_academico` */
 
 /*Table structure for table `rol` */
 
@@ -118,15 +133,42 @@ DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `expires` int(11) unsigned NOT NULL,
-  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `sessions` */
 
 insert  into `sessions`(`session_id`,`expires`,`data`) values 
-('_l1lS4IBBFyCvnZWc06WsdNopnK5YLpW',1648527541,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"correcto\":[\"bienvenido  Alexandra\"]},\"passport\":{\"user\":{}}}'),
-('lGPidjkLqiGTdMrwNrSECXyVWrNrt_Or',1648608210,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"correcto\":[\"bienvenido  Alexandra\"]},\"passport\":{\"user\":{\"id\":38,\"username\":\"Alexandra\"}}}');
+('Yfjgkq1hLHG6dX1tGYe7GE96kXak1KrY',1648612442,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('lDZgG6WnyrNjNcU9fs0LHG_RwwLcbE-u',1648610222,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
+
+/*Table structure for table `tipo_contrato` */
+
+DROP TABLE IF EXISTS `tipo_contrato`;
+
+CREATE TABLE `tipo_contrato` (
+  `id_Contrato` int(11) NOT NULL AUTO_INCREMENT,
+  `Numero_Contrato` int(11) NOT NULL,
+  `Tipo_Contrato` varchar(30) NOT NULL,
+  `salario` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_Contrato`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tipo_contrato` */
+
+/*Table structure for table `tipo_empleado` */
+
+DROP TABLE IF EXISTS `tipo_empleado`;
+
+CREATE TABLE `tipo_empleado` (
+  `id_Tipo_Emple` int(11) NOT NULL AUTO_INCREMENT,
+  `Area` varchar(30) NOT NULL,
+  `Cargo` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_Tipo_Emple`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `tipo_empleado` */
 
 /*Table structure for table `usuarios` */
 
@@ -138,14 +180,13 @@ CREATE TABLE `usuarios` (
   `password` varchar(100) DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`id_usuario`,`usuario`,`password`,`id_rol`) values 
 (38,'Alexandra','$2a$10$lKw9k6lfV6XIfpi10TVf/uZ3U0v1Tw9IpqwAPCose8BgD4IfqyuMy',2),
-(39,'Liza','$2a$10$qXyOITUY5GuetRp4mIIWh.B3Xub6IA7op7ZZ29gtrh6BiDIYBP12u',2),
-(41,'Soraya','$2a$10$LRm0kKlxyl7hzZK6UCi8ouCP1g0qL7DT7M5FEfuTvkSE5bM5rPFoa',2);
+(39,'Liza','$2a$10$qXyOITUY5GuetRp4mIIWh.B3Xub6IA7op7ZZ29gtrh6BiDIYBP12u',2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
