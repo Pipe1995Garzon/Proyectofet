@@ -37,6 +37,26 @@ insert  into `empleados`(`id_empleado`,`nombre`,`apellido`,`edad`) values
 (5,'Victoria','Villalba',25),
 (6,'Yan','Villalba',26);
 
+/*Table structure for table `empleados_fet` */
+
+DROP TABLE IF EXISTS `empleados_fet`;
+
+CREATE TABLE `empleados_fet` (
+  `id_empleado_fet` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `apellido` varchar(50) DEFAULT NULL,
+  `direccion` varchar(50) DEFAULT NULL,
+  `edad` int(11) DEFAULT NULL,
+  `id_programa` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_empleado_fet`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `empleados_fet` */
+
+insert  into `empleados_fet`(`id_empleado_fet`,`nombre`,`apellido`,`direccion`,`edad`,`id_programa`,`id_usuario`) values 
+(1,'Alexandra ','Roa','km 10 via al sur',25,6,0);
+
 /*Table structure for table `lista_usuarios` */
 
 DROP TABLE IF EXISTS `lista_usuarios`;
@@ -54,6 +74,26 @@ CREATE TABLE `lista_usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `lista_usuarios` */
+
+/*Table structure for table `programa` */
+
+DROP TABLE IF EXISTS `programa`;
+
+CREATE TABLE `programa` (
+  `id_programa` int(11) NOT NULL AUTO_INCREMENT,
+  `programa` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_programa`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `programa` */
+
+insert  into `programa`(`id_programa`,`programa`) values 
+(1,'Seguridad ocupacional'),
+(2,'Ingenieria de alimentos'),
+(3,'Ingenieria de alimentos'),
+(4,'Ingenieria de software'),
+(5,'Ingeieria Electrica'),
+(6,'Ingenieria Ambiental');
 
 /*Table structure for table `rol` */
 
@@ -85,10 +125,8 @@ CREATE TABLE `sessions` (
 /*Data for the table `sessions` */
 
 insert  into `sessions`(`session_id`,`expires`,`data`) values 
-('Vo7hBDndFqnTDZ36UOo48sUtpWNTjroO',1648006969,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('e0r9yJ-IxX4ZqZOfr_EoYpv2gxg9GSIg',1648083686,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"correcto\":[\"bienvenido  Alexandra\"]},\"passport\":{\"user\":{}}}'),
-('yKmdloJSXDFUT6lmpR0cnxiqbgbKyjr9',1648034685,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"success\":[\"bienvenido  Alexandra\"]}}'),
-('yUo_7SMYteAIeQbdXV7ag7WB3tMunFke',1648051094,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"correcto\":[\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\",\"bienvenido  Alexandra\"]},\"passport\":{\"user\":{}}}');
+('_l1lS4IBBFyCvnZWc06WsdNopnK5YLpW',1648527541,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"correcto\":[\"bienvenido  Alexandra\"]},\"passport\":{\"user\":{}}}'),
+('lGPidjkLqiGTdMrwNrSECXyVWrNrt_Or',1648608210,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"correcto\":[\"bienvenido  Alexandra\"]},\"passport\":{\"user\":{\"id\":38,\"username\":\"Alexandra\"}}}');
 
 /*Table structure for table `usuarios` */
 
@@ -100,13 +138,14 @@ CREATE TABLE `usuarios` (
   `password` varchar(100) DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
 insert  into `usuarios`(`id_usuario`,`usuario`,`password`,`id_rol`) values 
 (38,'Alexandra','$2a$10$lKw9k6lfV6XIfpi10TVf/uZ3U0v1Tw9IpqwAPCose8BgD4IfqyuMy',2),
-(39,'Liza','$2a$10$qXyOITUY5GuetRp4mIIWh.B3Xub6IA7op7ZZ29gtrh6BiDIYBP12u',2);
+(39,'Liza','$2a$10$qXyOITUY5GuetRp4mIIWh.B3Xub6IA7op7ZZ29gtrh6BiDIYBP12u',2),
+(41,'Soraya','$2a$10$LRm0kKlxyl7hzZK6UCi8ouCP1g0qL7DT7M5FEfuTvkSE5bM5rPFoa',2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -4,7 +4,7 @@ const { database } = require('./keys');
 
 
 const pool = mysql.createPool(database);
-
+console.log('por aqui anduve')
 pool.getConnection((err, connection) => {
     if (err) {
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {

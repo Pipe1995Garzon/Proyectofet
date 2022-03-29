@@ -33,9 +33,24 @@ async function updateteEmployedController(req, res) {
     res.redirect('/setusers/list_employees')
 }
 
+//completed register get
+async function formCompletedRegisterController(req, res) {
+    const program_list = await usersModel().formShowStudyArea();
+    res.render('users/complete_register', { program_list });
+    //console.log(employed_list);
+}
+//completed register post
+async function formCompletedRegisterPostController(req, res) {
+    const data = req.body;
+    await usersModel().formComletedStudyArea(data);
+    req.flash('success', 'The proccess was successfullly');
+    res.redirect('/setusers/complete_register');
+}
 module.exports = {
     addEmployedController,
     listEmployedController,
     deleteEmployedController,
-    updateteEmployedController
+    updateteEmployedController,
+    formCompletedRegisterController,
+    formCompletedRegisterPostController
 }

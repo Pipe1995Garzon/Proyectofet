@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('../lib/helpers');
 
+
 //INICIA VALIDACION DEL LOGEO
 passport.use('local.login', new LocalStrategy({
     usernameField: 'usuario',
@@ -17,7 +18,7 @@ passport.use('local.login', new LocalStrategy({
         console.log(passvalida)
             //console.log(user.pass)
         if (passvalida) {
-            done(null, user, req.flash('correcto', 'bienvenido  ' + user.usuario))
+            done(null, user, req.flash('success', 'bienvenido  ' + user.usuario))
         } else {
             done(null, false, req.flash('message', 'usuario o clave incorrecta '))
         }
@@ -53,11 +54,10 @@ passport.use('local.registrar', new LocalStrategy({
 
 passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
-        cb(null, { id: user.id, username: user.username });
-        console.log(user.usuario, user.id_usuario)
+        cb(null, { id: user.id_usuario, username: user.usuario });
+        console.log('sera??', user.id_usuario, user.usuario)
     });
 });
-
 passport.deserializeUser(function(user, cb) {
     process.nextTick(function() {
         return cb(null, user);

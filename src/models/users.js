@@ -18,10 +18,21 @@ module.exports = function() {
         let sql = "delete from empleados where id_empleado = ?";
         return await pool.query(sql, employees);
     }
-
+    //update employes
     async function updateEmployeesModel(employees) {
         let sql = `update empleados set nombre=?, 
                   apellido=?,edad=? where id_empleado=?`;
+        return await pool.query(sql, employees);
+    }
+
+    //form completed register get
+    async function formShowStudyArea() {
+        let querylist = "select * from programa";
+        return await pool.query(querylist);
+    }
+    //form completed register post.
+    async function formComletedStudyArea(employees) {
+        let sql = "insert into empleados_fet set ?";
         return await pool.query(sql, employees);
     }
 
@@ -29,6 +40,8 @@ module.exports = function() {
         addEmployeesModel,
         listEmployes,
         deleteEmployeesModel,
-        updateEmployeesModel
+        updateEmployeesModel,
+        formShowStudyArea,
+        formComletedStudyArea
     }
 }

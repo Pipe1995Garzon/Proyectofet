@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const { isLoggedIn } = require('../lib/auth');
+const { isnotLoggedIn } = require('../lib/auth');
 
 router.get('/signup', (req, res) => {
     res.render('auth/signup');
@@ -8,12 +10,12 @@ router.get('/signup', (req, res) => {
 
 
 router.post('/signup', passport.authenticate('local.registrar', {
-    successRedirect: '/perfil',
+    successRedirect: '/auth/user_profile',
     failureRedirect: '/signup',
     failureFlash: true
 }));
 
-router.get('/signin', (req, res) => {
+router.get('/signin', isnotLoggedIn, (req, res) => {
     res.render('auth/signin');
 })
 
@@ -25,10 +27,14 @@ router.post('/signin', (req, res, next) => {
     })(req, res, next)
 })
 
-router.get('/user_profile', (req, res) => {
+router.get('/user_profile', isLoggedIn, async(req, res) => {
     res.render('users/user_profile');
 });
 
+router.get('/logout', isLoggedIn, (req, res) => {
+    req.logOut();
+    res.redirect('/signin')
+});
 
 
 module.exports = router;
