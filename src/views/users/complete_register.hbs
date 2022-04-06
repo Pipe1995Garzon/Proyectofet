@@ -6,7 +6,7 @@
                         <div class="card text-center">
                             <form action="/setusers/completed_register" method="post">
                                 <div class="form-group">
-                                    <h5 class="card-title">Completa tu registro {{user.username}} {{user.id_usuario}} </h5>
+                                    <h5 class="card-title">Completa tu registro {{user.username}}  </h5>
                                     <label class="form-label">Nombres</label>
                                     <input type="text" class="form-control" name="nombre" placeholder="nombre" autofocus required/>
                                 </div>
@@ -30,7 +30,7 @@
                                         {{/each}}
                                     </select>                             
                                  </div>
-                                 <input type="hidden" name="id_usuario" value="{{user.id_usuario}}"/>
+                                 <input type="hidden" name="id_usuario" value="{{user.id}}"/>
                                 <div class="form-group">
                                     <label class="form-label"> </label><br>
                                     <button class="btn btn-primary btn-block" type="submit">Enviar</button><br>
