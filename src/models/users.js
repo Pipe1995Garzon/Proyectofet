@@ -1,4 +1,6 @@
 const pool = require('../database');
+const passport = require('passport');
+
 
 module.exports = function() {
     //add employed
@@ -35,6 +37,13 @@ module.exports = function() {
         let sql = "insert into empleados_fet set ?";
         return await pool.query(sql, employees);
     }
+    //teacher or admin `select id_rol from usuarios where id_usuario='${rol}'`;
+    //"select id_rol from usuarios where id_usuario=";
+    async function teacheroradmin(rol) {
+        console.log(req.user.id);
+        const sql = `select id_rol from usuarios where id_usuario='${rol}'`;
+        return await pool.query(sql);
+    }
 
     return {
         addEmployeesModel,
@@ -42,6 +51,7 @@ module.exports = function() {
         deleteEmployeesModel,
         updateEmployeesModel,
         formShowStudyArea,
-        formComletedStudyArea
+        formComletedStudyArea,
+        teacheroradmin
     }
 }

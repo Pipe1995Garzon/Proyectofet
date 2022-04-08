@@ -1,3 +1,7 @@
+const passport = require('passport');
+const { isLoggedIn } = require('../lib/auth');
+const { isnotLoggedIn } = require('../lib/auth');
+
 const usersModel = require('../models/users');
 //render a una vista y redirect va a la ruta
 //add employes
@@ -9,10 +13,12 @@ async function addEmployedController(req, res) {
 }
 //list employed controller
 async function listEmployedController(req, res) {
-    const employed_list = await usersModel().listEmployes();
-    res.render('users/list_users', { employed_list });
+    // const employed_list = await usersModel().listEmployes();
+    res.render('users/list_users');
     //console.log(employed_list);
 }
+
+
 
 async function deleteEmployedController(req, res) {
     const data = req.params.id;
@@ -46,11 +52,24 @@ async function formCompletedRegisterPostController(req, res) {
     req.flash('success', 'The proccess was successfullly');
     res.redirect('/setusers/complete_register');
 }
+
+//admin or teacher redirect: /auth/user_profile
+async function teacherORAdminController(req, res) {
+    const data = req.user.rol;
+    console.log(data);
+    if (data == 1) {
+        res.render('users/admin');
+    } else {
+        res.render('users/user_profile');
+    }
+}
+
 module.exports = {
     addEmployedController,
     listEmployedController,
     deleteEmployedController,
     updateteEmployedController,
     formCompletedRegisterController,
-    formCompletedRegisterPostController
+    formCompletedRegisterPostController,
+    teacherORAdminController
 }

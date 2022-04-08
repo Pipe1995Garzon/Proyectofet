@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const isAdminorTeaccher = require('../controllers/users');
 const passport = require('passport');
 const { isLoggedIn } = require('../lib/auth');
 const { isnotLoggedIn } = require('../lib/auth');
 
-router.get('/signup', (req, res) => {
+router.get('/signup', isnotLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
@@ -27,9 +28,7 @@ router.post('/signin', (req, res, next) => {
     })(req, res, next)
 })
 
-router.get('/user_profile', isLoggedIn, async(req, res) => {
-    res.render('users/user_profile');
-});
+router.get('/user_profile', isLoggedIn, isAdminorTeaccher.teacherORAdminController);
 
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logOut();

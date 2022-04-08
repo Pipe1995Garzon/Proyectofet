@@ -49,6 +49,7 @@ app.use(require('./routes/authentication'));
 app.use('/setusers', require('./routes/set_users'));
 app.use('/lista_administrativos', require('./routes/lista_administrativos'));
 app.use('/auth', require('./routes/authentication'));
+app.use('/administrador', require('./routes/administrador'));
 //public
 app.use(express.static(path.join(__dirname, 'public')));
 //iniciando servidor

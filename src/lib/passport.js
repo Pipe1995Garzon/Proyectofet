@@ -11,7 +11,7 @@ passport.use('local.login', new LocalStrategy({
     passReqToCallback: true
 }, async(req, usuario, password, done) => {
     const filas = await pool.query('SELECT * FROM usuarios WHERE usuario=?', [usuario]);
-    console.log(req.body)
+    console.log(filas);
     if (filas.length > 0) {
         const user = filas[0]
         const passvalida = await helpers.compararclave(password, user.password);
@@ -37,24 +37,31 @@ passport.use('local.registrar', new LocalStrategy({
     passReqToCallback: true
 }, async(req, usuario, password, done) => {
     //const { nombres, edad, identificacion, telefono, rol_id } = req.body
-    const { id_rol } = req.body;
     // console.log(req.body)
-    const NuevoUsuario = {
-        usuario,
-        password,
-        id_rol
+    const { id_rol } = req.body;
+    //validar que el usuario repetido no se vaya a loguar
+    const validar = await pool.query('SELECT * FROM usuarios WHERE usuario=?', [usuario]);
+    if (validar.length > 0) {
+        return done(null, false, req.flash('message', 'el usuario ya existe'))
+    } else {
+        const NuevoUsuario = {
+            usuario,
+            password,
+            id_rol
+        }
+        NuevoUsuario.password = await helpers.encriptar(password);
+        const result = await pool.query('insert into usuarios set ?', [NuevoUsuario])
+        NuevoUsuario.id = result.insertId;
+        console.log(req.body)
+        console.log(result)
+        return (null, NuevoUsuario)
     }
-    NuevoUsuario.password = await helpers.encriptar(password);
-    const result = await pool.query('insert into usuarios set ?', [NuevoUsuario])
-    NuevoUsuario.id = result.insertId;
-    console.log(req.body)
-    console.log(result)
-    return (null, NuevoUsuario)
+
 }));
 
 passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
-        cb(null, { id: user.id_usuario, username: user.usuario });
+        cb(null, { id: user.id_usuario, username: user.usuario, rol: user.id_rol });
         console.log('sera??', user.id_usuario, user.usuario)
     });
 });
