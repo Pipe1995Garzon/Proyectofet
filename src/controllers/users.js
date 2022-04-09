@@ -1,7 +1,6 @@
 const passport = require('passport');
 const { isLoggedIn } = require('../lib/auth');
 const { isnotLoggedIn } = require('../lib/auth');
-
 const usersModel = require('../models/users');
 //render a una vista y redirect va a la ruta
 //add employes
