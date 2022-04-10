@@ -12,8 +12,8 @@ async function addEmployedController(req, res) {
 }
 //list employed controller
 async function listEmployedController(req, res) {
-    // const employed_list = await usersModel().listEmployes();
-    res.render('users/list_users');
+    const employed_list = await usersModel().listEmployes();
+    res.render('users/list_users', { employed_list });
     //console.log(employed_list);
 }
 
@@ -55,6 +55,7 @@ async function formCompletedRegisterPostController(req, res) {
 //admin or teacher redirect: /auth/user_profile
 async function teacherORAdminController(req, res) {
     const data = req.user.rol;
+    //const datos = await usersModel().teacherrequest()
     console.log(data);
     if (data == 1) {
         res.render('users/admin');

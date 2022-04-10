@@ -39,9 +39,9 @@ module.exports = function() {
     }
     //teacher or admin `select id_rol from usuarios where id_usuario='${rol}'`;
     //"select id_rol from usuarios where id_usuario=";
-    async function teacheroradmin(rol) {
+    async function teacherrequest() {
         console.log(req.user.id);
-        const sql = `select id_rol from usuarios where id_usuario='${rol}'`;
+        const sql = "select * from labor";
         return await pool.query(sql);
     }
 
@@ -52,6 +52,6 @@ module.exports = function() {
         updateEmployeesModel,
         formShowStudyArea,
         formComletedStudyArea,
-        teacheroradmin
+        teacherrequest
     }
 }

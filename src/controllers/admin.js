@@ -1,23 +1,35 @@
 const adminModel = require('../models/admin');
-const passport = require('passport');
-const { isLoggedIn } = require('../lib/auth');
-const { isnotLoggedIn } = require('../lib/auth');
+
 
 async function AddTeacher(req, res) {
     const data = req.user.rol;
     if (data == 1) {
-        //const program_list = await usersModel().formShowStudyArea();
         const nivel_academico = await adminModel().academicLevel();
-        res.render('users/add_teacher', { nivel_academico });
+        const tipo_contrato = await adminModel().tipoContrato();
+        const labor = await adminModel().labor();
+        const programa = await adminModel().programa();
+        res.render('users/add_teacher', { nivel_academico, tipo_contrato, labor, programa });
     } else {
         req.flash('message', 'no eres administrador')
         res.render('users/user_profile');
     }
 }
 
+async function AddTeacherPost(req, res) {
+    const data = req.user.rol;
+    const datos = req.body;
+    if (data == 1) {
+        await adminModel().add_teacher_post(datos);
+        req.flash('success', 'User was saved successfullly');
+        res.redirect('/administrador/add_teacher');
+    } else {
+
+    }
+}
 
 
 
 module.exports = {
-    AddTeacher
+    AddTeacher,
+    AddTeacherPost
 }

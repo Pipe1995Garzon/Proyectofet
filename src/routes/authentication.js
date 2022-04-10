@@ -36,7 +36,7 @@ router.get('/user_profile', isLoggedIn, isAdminorTeaccher.teacherORAdminControll
 //cerrar sesion modulo gestion humana
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logOut();
-    res.redirect('/signin')
+    res.redirect('/signingestionhumana')
 });
 
 

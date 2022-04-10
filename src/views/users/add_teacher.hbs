@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card text-center">
-                            <form action="/setusers/register_employed" method="post">
+                            <form action="/administrador/addteacher" method="post">
                                 <div class="form-group">
                                     <h5 class="card-title">Registro de docentes</h5>
                                     <label class="form-label">nombre completo</label>
@@ -13,31 +13,63 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="form-label">identificacion</label>
+                                    <input type="number" class="form-control" name="CC" placeholder="CC"  required/>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="form-label">correo institucional</label>
                                     <input type="email" class="form-control" name="correo_electronico" placeholder="ejemplo@fet.edu.co"  required/>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">identificacion</label>
-                                    <input type="number" class="form-control" name="identificacion" placeholder="CC"  required/>
-                                </div>
-
                                 <div class="form-group">                    
                                     <label>Nivel academico</label><br>
-                                    <select name="id_programa" class="btn btn-success ">
+                                    <select name="id_Nivel_Aca" class="btn btn-success ">
                                         {{#each nivel_academico}} "
                                     <option value="{{id_Nivel_Aca}}" selected>{{Academico}}</option> 
                                         {{/each}}
                                     </select>                             
                                  </div>
 
+                                <div class="form-group">                    
+                                    <label>Tipo de contrato</label><br>
+                                    <select name="id_Contrato" class="btn btn-success ">
+                                        {{#each tipo_contrato}} 
+                                    <option value="{{id_Contrato}}" selected>{{Tipo_Contrato}}</option> 
+                                        {{/each}}
+                                    </select>                             
+                                 </div>
+                                 
+                                 <div class="form-group">                    
+                                    <label>labor</label><br>
+                                    <select name="id_labor" class="btn btn-success ">
+                                        {{#each labor}} 
+                                    <option value="{{id_labor}}" selected>{{labor}}</option> 
+                                        {{/each}}
+                                    </select>                             
+                                 </div>
+
+                                  <div class="form-group">                    
+                                    <label>Programa</label><br>
+                                    <select name="id_programa" class="btn btn-success ">
+                                        {{#each programa}} 
+                                    <option value="{{id_programa}}" selected>{{programa}}</option> 
+                                        {{/each}}
+                                    </select>                             
+                                 </div>
+
                                  <div class="form-group">
                                     <label class="form-label">Fecha de inicio</label>
-                                    <input type="date" class="form-control" name="fecha_inicio"  min="2020-01-01" max="2022-09-01"  required/>
+                                    <input type="date" class="form-control" name="inicio_contrato"  min="2020-01-01" max="2022-09-01"  required/>
                                 </div>
                                  <div class="form-group">
                                     <label class="form-label">Fecha final</label>
-                                    <input type="date" class="form-control" name="fecha_final"  min="2020-01-01" max="2022-09-01"  required/>
+                                    <input type="date" class="form-control" name="fin_contrato"  min="2020-01-01" max="2022-09-01"  required/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Salario</label>
+                                    <input type="number" class="form-control" name="salario" placeholder="salario"  required/>
                                 </div>
 
                                 <div class="form-group">
