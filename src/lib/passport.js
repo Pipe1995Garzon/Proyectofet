@@ -38,24 +38,35 @@ passport.use('local.registrar', new LocalStrategy({
 }, async(req, usuario, password, done) => {
     //const { nombres, edad, identificacion, telefono, rol_id } = req.body
     // console.log(req.body)
-    const { id_rol } = req.body;
-    //validar que el usuario repetido no se vaya a loguar
-    const validar = await pool.query('SELECT * FROM usuarios WHERE usuario=?', [usuario]);
-    if (validar.length > 0) {
-        return done(null, false, req.flash('message', 'el usuario ya existe'))
-    } else {
-        const NuevoUsuario = {
-            usuario,
-            password,
-            id_rol
+    const { id_rol, CC } = req.body;
+    //si el usuario no esta en la base de datos fet no va a poder registrarse
+    const validarexistencia = await pool.query('SELECT * FROM docente where CC=?', [CC]);
+    if (validarexistencia.length == 1) {
+        //validar que el usuario repetido no se vaya a loguar
+        const validar = await pool.query('SELECT * FROM usuarios WHERE usuario=?', [usuario]);
+        if (validar.length > 0) {
+            return done(null, false, req.flash('message', 'el usuario ya existe'))
+        } else {
+            const NuevoUsuario = {
+                usuario,
+                password,
+                id_rol
+            }
+            NuevoUsuario.password = await helpers.encriptar(password);
+            const result = await pool.query('insert into usuarios set ?', [NuevoUsuario])
+            NuevoUsuario.id = result.insertId;
+            //console.log(req.body)
+            //console.log(result)
+            console.log(NuevoUsuario.id);
+            console.log(CC)
+            await pool.query('update docente set id_usuario=? WHERE CC=?', [NuevoUsuario.id, CC])
+            console.log('registro exitoso')
+            return (null, NuevoUsuario)
         }
-        NuevoUsuario.password = await helpers.encriptar(password);
-        const result = await pool.query('insert into usuarios set ?', [NuevoUsuario])
-        NuevoUsuario.id = result.insertId;
-        console.log(req.body)
-        console.log(result)
-        return (null, NuevoUsuario)
+    } else {
+        return done(null, false, req.flash('message', 'el usuario no existe en la bd FET o existe mas de una vez. consulte al administrador'))
     }
+
 
 }));
 
