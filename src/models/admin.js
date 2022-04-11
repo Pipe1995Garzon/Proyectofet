@@ -22,7 +22,7 @@ module.exports = function() {
         return await pool.query(querylist);
     }
 
-    //listar labor docente
+    //insertar docente
     async function add_teacher_post(docente) {
         let sql = "insert into docente set ?";
         return await pool.query(sql, docente);

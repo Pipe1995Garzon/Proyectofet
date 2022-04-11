@@ -50,6 +50,7 @@ app.use('/setusers', require('./routes/set_users'));
 app.use('/lista_administrativos', require('./routes/lista_administrativos'));
 app.use('/auth', require('./routes/authentication'));
 app.use('/administrador', require('./routes/administrador'));
+app.use('/docente', require('./routes/docente'));
 //public
 app.use(express.static(path.join(__dirname, 'public')));
 //iniciando servidor

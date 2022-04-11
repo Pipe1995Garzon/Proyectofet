@@ -50,6 +50,7 @@ passport.use('local.registrar', new LocalStrategy({
             const NuevoUsuario = {
                 usuario,
                 password,
+                CC,
                 id_rol
             }
             NuevoUsuario.password = await helpers.encriptar(password);
@@ -72,7 +73,7 @@ passport.use('local.registrar', new LocalStrategy({
 
 passport.serializeUser(function(user, cb) {
     process.nextTick(function() {
-        cb(null, { id: user.id_usuario, username: user.usuario, rol: user.id_rol });
+        cb(null, { id: user.id_usuario, username: user.usuario, rol: user.id_rol, cc: user.CC });
         console.log('sera??', user.id_usuario, user.usuario)
     });
 });

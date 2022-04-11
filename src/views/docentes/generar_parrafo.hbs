@@ -1,0 +1,37 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="card text-center">
+                <div class="card-body">
+                    <label>Usuario: {{user.username}} {{user.cc}}</label>
+                    <h4>LA SUSCRITA COORDINADORA DE TALENTO HUMANA DE
+                         LA FUNDACIÓN ESCUELA TECNOLÓGICA DE NEIVA “JESÚS OVIEDO PÉREZ” – FET</h4>
+
+                         CERTIFICA QUE  
+                         {{#each texto}}
+                            {{nombres}}
+                         {{/each}}
+                         identitficado con la cedula 
+                         {{#each texto}}
+                            {{CC}}
+                         {{/each}}
+                         , labora en la Fundación Escuela Tecnológica de Neiva “Jesús Oviedo Pérez” - FET
+                         mediante contrato individual de trabajo a término fijo desde el día
+                         {{#each texto}}
+                            {{inicio_contrato}}
+                         {{/each}}
+                         , desempeñando el cargo de 
+                          {{#each texto}}
+                            {{academico}}
+                         {{/each}}
+                         con un salario de 
+                          {{#each texto}}
+                            {{salario}}
+                         {{/each}}
+                    <p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
