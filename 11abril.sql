@@ -36,23 +36,32 @@ CREATE TABLE `administrativos` (
 DROP TABLE IF EXISTS `docente`;
 
 CREATE TABLE `docente` (
-  `id_docentes` int(11) NOT NULL,
+  `id_docentes` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) DEFAULT NULL,
-  `identificacion` int(11) DEFAULT NULL,
+  `CC` int(11) DEFAULT NULL,
   `correo_electronico` varchar(50) DEFAULT NULL,
-  `edad` int(11) DEFAULT NULL,
-  `telefono` int(11) DEFAULT NULL,
+  `id_Nivel_Aca` int(11) DEFAULT NULL,
+  `id_Contrato` int(11) DEFAULT NULL,
+  `id_labor` int(11) DEFAULT NULL,
+  `id_programa` int(11) DEFAULT NULL,
+  `inicio_contrato` date DEFAULT NULL,
+  `fin_contrato` date DEFAULT NULL,
+  `salario` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL,
-  `id_labor` int(11) DEFAULT NULL,
-  `id_Inicio_Contrato` int(11) DEFAULT NULL,
-  `id_Nivel_Aca` int(11) DEFAULT NULL,
-  `id_programa` int(11) DEFAULT NULL,
   `id_tiempo` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_docentes`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `docente` */
+
+insert  into `docente`(`id_docentes`,`nombres`,`CC`,`correo_electronico`,`id_Nivel_Aca`,`id_Contrato`,`id_labor`,`id_programa`,`inicio_contrato`,`fin_contrato`,`salario`,`id_usuario`,`id_rol`,`id_tiempo`) values 
+(3,'DANIELA FERNANDA HUESO CALDERON',1075289057,'daniela_huesoga@fet.edu.co',2,1,1,1,'2022-02-07','2022-06-04',22440000,53,NULL,NULL),
+(4,'MARIA PAULA MARTINEZ NIEVA',1026298024,'paulamari@nhotmail.com',3,1,1,3,'2022-02-11','2022-06-06',2448000,NULL,NULL,NULL),
+(5,'JIMENA ANDRADE CANO',36309339,'jimena_andradeca@fet.edu.co',2,1,4,6,'2022-02-07','2022-06-04',2244000,NULL,NULL,NULL),
+(6,'ISRAEL SOLORZANO SALAS',7687894,'isolorzano@misena.edu.co',2,2,1,4,'2022-02-16','2022-06-04',1547000,NULL,NULL,NULL),
+(7,'GONZALO DUQUE OCHOA',1053790798,'gduqueo@unal.edu.co',1,2,1,5,'2022-02-07','2022-06-04',1224000,NULL,NULL,NULL),
+(8,'WILLIAM ORLANDO GAVIRIA RAMIREZ',7733073,'william_gaviriara@fet.edu.co',3,1,1,1,'2022-02-07','2022-06-04',2448000,54,NULL,NULL);
 
 /*Table structure for table `docentes` */
 
@@ -65,9 +74,13 @@ CREATE TABLE `docentes` (
   `Correo` varchar(30) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_Docentes`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `docentes` */
+
+insert  into `docentes`(`id_Docentes`,`Nombre`,`Cedula`,`Correo`,`id_usuario`) values 
+(1,'Jaime',1525,'holis',1),
+(2,'Luisa',1363,'holis',NULL);
 
 /*Table structure for table `empleados` */
 
@@ -210,7 +223,10 @@ CREATE TABLE `sessions` (
 /*Data for the table `sessions` */
 
 insert  into `sessions`(`session_id`,`expires`,`data`) values 
-('_kvL99OdBbznKa0wkuhj1BD1cPLRciKS',1649472471,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}');
+('0XzMKc5UsQQ2PEbsJc89hN4i_qNdcv9P',1649781211,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"id\":53,\"username\":\"daniela_huesoga@fet.edu.co\",\"rol\":2,\"cc\":1075289057}}}'),
+('2DIVAb07ETgsv-b8NXGmAlynmk3fUFXa',1649738585,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('JN5he-L0T3KfD4DAc-_dUMZrLDZPJToL',1649758825,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"id\":44,\"username\":\"andres_garzonle@fet.edu.co\",\"rol\":1}}}'),
+('OIOs_Ej57600b5woG2yNO4iiYHV83xGv',1649798842,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}');
 
 /*Table structure for table `tiempo` */
 
@@ -240,13 +256,15 @@ DROP TABLE IF EXISTS `tipo_contrato`;
 
 CREATE TABLE `tipo_contrato` (
   `id_Contrato` int(11) NOT NULL AUTO_INCREMENT,
-  `Numero_Contrato` int(11) NOT NULL,
   `Tipo_Contrato` varchar(30) NOT NULL,
-  `salario` varchar(30) NOT NULL,
   PRIMARY KEY (`id_Contrato`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tipo_contrato` */
+
+insert  into `tipo_contrato`(`id_Contrato`,`Tipo_Contrato`) values 
+(1,'Tiempo completo'),
+(2,'Medio Tiempo');
 
 /*Table structure for table `tipo_empleado` */
 
@@ -269,15 +287,17 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(50) DEFAULT NULL,
   `password` varchar(150) DEFAULT NULL,
+  `CC` int(11) DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `usuarios` */
 
-insert  into `usuarios`(`id_usuario`,`usuario`,`password`,`id_rol`) values 
-(43,'gustavo_norename@fet.edu.co','$2a$10$Iy8vY34ID3bUMWb4nQ9oVeElM1bUaiaI9dvXCC2AnH/ClIcN3/jBe',2),
-(44,'andres_garzonle@fet.edu.co','$2a$10$pjj.P5V3Elzn10YpGgHhtO70rEK0oDyXF0jkFpcFihIYQ.Ez9A9f2',1);
+insert  into `usuarios`(`id_usuario`,`usuario`,`password`,`CC`,`id_rol`) values 
+(44,'andres_garzonle@fet.edu.co','$2a$10$pjj.P5V3Elzn10YpGgHhtO70rEK0oDyXF0jkFpcFihIYQ.Ez9A9f2',NULL,1),
+(53,'daniela_huesoga@fet.edu.co','$2a$10$X2avMRPNr05ETxg9n9TZnuO3FiJYLONN/1wTwP3QShxlPndGXR.2q',1075289057,2),
+(54,'william_gaviriara@fet.edu.co','$2a$10$OEopomdzh6aW7LCs0NA8GekBKJNkvobOyexJJjiIuIbonNdLimcvy',7733073,2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
