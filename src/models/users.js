@@ -37,8 +37,8 @@ module.exports = function() {
         let sql = "insert into empleados_fet set ?";
         return await pool.query(sql, employees);
     }
-    //teacher or admin `select id_rol from usuarios where id_usuario='${rol}'`;
-    //"select id_rol from usuarios where id_usuario=";
+
+
     async function teacherrequest() {
         console.log(req.user.id);
         const sql = "select * from labor";
