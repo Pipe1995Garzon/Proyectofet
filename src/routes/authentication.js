@@ -19,9 +19,17 @@ router.post('/signup', passport.authenticate('local.registrar', {
 }));
 //ingresar get modulo gestion humana
 router.get('/signingestionhumana', isnotLoggedIn, (req, res) => {
-        res.render('auth/signin');
+        res.render('auth/Signintalentohumano');
     })
     //ingresar post modulo gestion humana
+router.post('/signin', passport.authenticate('local.login', {
+    successRedirect: '/auth/user_profile',
+    failureRedirect: '/signingestionhumana',
+    failureFlash: true
+}));
+
+
+/*
 router.post('/signin', (req, res, next) => {
     passport.authenticate('local.login', {
         successRedirect: '/auth/user_profile',
@@ -29,6 +37,7 @@ router.post('/signin', (req, res, next) => {
         failureFlash: true
     })(req, res, next)
 })
+*/
 
 //perfil admin o docente modulo gestion humane
 router.get('/user_profile', isLoggedIn, isAdminorTeaccher.teacherORAdminController);

@@ -36,10 +36,7 @@ passport.use('local.registrar', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async(req, usuario, password, done) => {
-    //const { nombres, edad, identificacion, telefono, rol_id } = req.body
-    // console.log(req.body)
     const { id_rol, CC } = req.body;
-    //si el usuario no esta en la base de datos fet no va a poder registrarse
     const validarexistencia = await pool.query('SELECT * FROM docente where CC=?', [CC]);
     if (validarexistencia.length == 1) {
         //validar que el usuario repetido no se vaya a loguar
@@ -56,13 +53,12 @@ passport.use('local.registrar', new LocalStrategy({
             NuevoUsuario.password = await helpers.encriptar(password);
             const result = await pool.query('insert into usuarios set ?', [NuevoUsuario])
             NuevoUsuario.id = result.insertId;
-            //console.log(req.body)
-            //console.log(result)
             console.log(NuevoUsuario.id);
             console.log(CC)
             await pool.query('update docente set id_usuario=? WHERE CC=?', [NuevoUsuario.id, CC])
             console.log('registro exitoso')
-            return (null, NuevoUsuario)
+            return (null, true, req.flash('message', 'registro exitoso'), NuevoUsuario)
+
         }
     } else {
         return done(null, false, req.flash('message', 'el usuario no existe en la bd FET o existe mas de una vez. consulte al administrador'))
